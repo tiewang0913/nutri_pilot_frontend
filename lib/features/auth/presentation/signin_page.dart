@@ -30,7 +30,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _gotoForgetPassword() {
-    setState(() => _error ='Hello World');
+    Navigator.pushNamedAndRemoveUntil(context, '/forgetPassword', (r) => false);
   }
 
   @override
