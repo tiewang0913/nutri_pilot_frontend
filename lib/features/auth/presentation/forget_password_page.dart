@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import '../../../core/network.dart';
 
 class ForgetPasswordPage extends StatefulWidget{
 
@@ -20,8 +21,24 @@ class _ForgetPasswordState extends State<ForgetPasswordPage>{
   final _newPwdControl = TextEditingController();
   final _confirmPwdControl = TextEditingController();
 
-  _sendOTP(){
+  _sendOTP() async {
+
+    // ignore: prefer_collection_literals
+    final result = await post('/', Map(), (json) => json as Map<String, dynamic>);
+
+    String? code = "";
+    switch(result){
+      case Ok(value: final body):
+        code = body["code"];
+      case Err(error: final e):{
+        code = "Exception";
+      }
+    }
+
     setState(() => step = 2);
+    setState(() {
+      _otpControl.text = code!;
+    });
   }
 
   _resetPassword(){

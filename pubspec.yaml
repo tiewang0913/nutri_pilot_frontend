@@ -35,6 +35,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
+  # dio framework is the basic layer of networking for interating with the sever
+  dio: ^5.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
