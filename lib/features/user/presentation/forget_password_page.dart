@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:nuitri_pilot_frontend/core/di.dart';
+import 'package:nuitri_pilot_frontend/features/user/presentation/widgets/text_field_widget.dart';
 import '../../../core/network.dart';
+import 'package:email_validator/email_validator.dart';
 
 class ForgetPasswordPage extends StatefulWidget{
 
@@ -21,6 +23,8 @@ class _ForgetPasswordState extends State<ForgetPasswordPage>{
   final _otpControl = TextEditingController();
   final _newPwdControl = TextEditingController();
   final _confirmPwdControl = TextEditingController();
+
+  bool _validateEmail(String email) => EmailValidator.validate(email);
   
 
   _sendOTP() async {
@@ -28,22 +32,33 @@ class _ForgetPasswordState extends State<ForgetPasswordPage>{
     setState(() {
       _loading = true;
     });
-    String email = _emailControl.text;
-    Result<String> res = await DI.I.userRepository.apply_for_reseting_password_otp(email);
-    if(res is BizOk<String>){
-      setState(() {
-        step = 2;
-      });
-    }else{
-      DI.I.errorHandler.handleBothError(res);
-    }
 
+    String email = _emailControl.text;
+
+    if(_validateEmail(email)){  
+      Result<String> res = await DI.I.userRepository.applyForResetingPasswordOtp(email);
+      if(res is BizOk<String>){
+        setState(() {
+          step = 2;
+        });
+      }else{
+        DI.I.errorHandler.handleBothError(res);
+      }
+    }else{
+      DI.I.errorHandler.handleBothError(BizErr(1, "Email is not valid"));
+    }
     setState(() {
       _loading = false;
     });
   }
 
   _resetPassword(){
+    String email = _emailControl.text;
+    String otp = _otpControl.text;
+    String newPwd = _newPwdControl.text;
+    String confirmPwd = _confirmPwdControl.text;
+
+    
 
   }
 
@@ -61,12 +76,9 @@ class _ForgetPasswordState extends State<ForgetPasswordPage>{
   ];
 
   List<Widget> get step2Controls => [
-    TextField(controller: _otpControl, decoration: const InputDecoration(labelText: 'OTP:')),
-    const SizedBox(height: 12),
-    TextField(controller: _newPwdControl, decoration: const InputDecoration(labelText: 'New Password:')),
-    const SizedBox(height: 12),
-    TextField(controller: _confirmPwdControl, decoration: const InputDecoration(labelText: 'ConfirmPassword:')),
-    const SizedBox(height: 12),
+    AppTextField(controller: _otpControl, label: "OTP"),
+    AppPasswordField(controller: _newPwdControl, label:"New Password"),
+    AppPasswordField(controller: _confirmPwdControl, label:"Confirm Password"),
     FilledButton(
       onPressed: _loading ? null : _resetPassword,
       child: _loading

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuitri_pilot_frontend/features/user/presentation/widgets/text_field_widget.dart';
 import '../../../core/di.dart';
 
 class SignInPage extends StatefulWidget {
@@ -47,10 +48,10 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(controller: _userCtrl, decoration: const InputDecoration(labelText: 'Username')),
-            const SizedBox(height: 12),
-            TextField(controller: _passCtrl, decoration: const InputDecoration(labelText: 'Password'), obscureText: true),
-            const SizedBox(height: 16),
+            AppTextField(controller: _userCtrl, label: "Email",),
+            
+            AppPasswordField(controller: _passCtrl, label: "Password"),
+            
             if (_error != null) Text(_error!, style: const TextStyle(color: Colors.red)),
             const SizedBox(height: 12),
             FilledButton(

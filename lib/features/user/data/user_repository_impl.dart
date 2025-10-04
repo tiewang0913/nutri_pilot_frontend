@@ -9,7 +9,7 @@ class UserRepositoryImpl extends UserBaseRepository{
 
 
   @override
-  Future<Result<String>> apply_for_reseting_password_otp(String email) async {
+  Future<Result<String>> applyForResetingPasswordOtp(String email) async {
     Map<String, dynamic> param = {"email": email};
     return await post('/users/apply_for_reseting_password_otp', param, (json) => json.toString());
   }
