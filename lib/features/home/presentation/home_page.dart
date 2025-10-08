@@ -7,7 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: AppBar(title: const Text('Nutri Pilot')),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
             const Icon(Icons.home, size: 64),
             const SizedBox(height: 12),
             Text(
-              'Welcome to Home',
+              'Welcome to Nutri Pilot',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),

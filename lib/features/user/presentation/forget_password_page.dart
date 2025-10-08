@@ -74,6 +74,8 @@ class _ForgetPasswordState extends State<ForgetPasswordPage> {
     setState(() {
       _loading = false;
     });
+
+    
   }
 
   _resetPassword() async {
@@ -92,6 +94,7 @@ class _ForgetPasswordState extends State<ForgetPasswordPage> {
       }else{
         if(res is BizOk){
           DI.I.messageHandler.showMessage(res.value!);
+          Navigator.pushNamedAndRemoveUntil(context, '/signin', (r) => false);
         }
       }
     }

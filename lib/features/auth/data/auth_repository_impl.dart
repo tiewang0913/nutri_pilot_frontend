@@ -1,4 +1,7 @@
-// lib/features/auth/data/auth_repository_impl.dart
+import 'package:nuitri_pilot_frontend/core/common_result.dart';
+import 'package:nuitri_pilot_frontend/core/di.dart';
+import 'package:nuitri_pilot_frontend/core/network.dart';
+
 import '../domain/auth_repository.dart';
 import 'local_auth_data_source.dart';
 
@@ -18,14 +21,18 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<bool> signIn({required String username, required String password}) async {
-    // Demo：只要非空就当登录成功；实际应调后端 API。
-    final ok = username.isNotEmpty && password.isNotEmpty;
-    if (ok) {
+  Future<bool> signIn({required String email, required String password}) async {
+    Map<String, dynamic> param = {"email": email, "password": password};
+    InterfaceResult<String> result =  await post("/auth/signin", param, (json) => json.toString());
+    if(DI.I.messageHandler.isErr(result)){
+      DI.I.messageHandler.handleErr(result);
+      _isLoggedIn = false;
+    }else{
       await _local.writeToken('demo_token_${DateTime.now().millisecondsSinceEpoch}');
       _isLoggedIn = true;
     }
-    return ok;
+    return _isLoggedIn;
+
   }
 
   @override

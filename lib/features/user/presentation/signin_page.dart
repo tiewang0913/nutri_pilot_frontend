@@ -11,27 +11,20 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
 
-
   final _userCtrl = TextEditingController();
   final _passCtrl = TextEditingController();
 
   bool _loading = false;
 
-
-  String? _error;
-
   Future<void> _submit() async {
-    setState(() { _loading = true; _error = null; });
-    final ok = await DI.I.authRepo.signIn(
-      username: _userCtrl.text.trim(),
+    setState(() { _loading = true;});
+    bool success = await DI.I.authRepo.signIn(
+      email: _userCtrl.text.trim(),
       password: _passCtrl.text,
     );
-    if (!mounted) return;
     setState(() => _loading = false);
-    if (ok) {
+    if(success){
       Navigator.pushNamedAndRemoveUntil(context, '/home', (r) => false);
-    } else {
-      setState(() => _error = 'Invalid credentials');
     }
   }
 
@@ -49,11 +42,7 @@ class _SignInPageState extends State<SignInPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             AppTextField(controller: _userCtrl, label: "Email",),
-            
             AppPasswordField(controller: _passCtrl, label: "Password"),
-            
-            if (_error != null) Text(_error!, style: const TextStyle(color: Colors.red)),
-            const SizedBox(height: 12),
             FilledButton(
               onPressed: _loading ? null : _submit,
               child: _loading

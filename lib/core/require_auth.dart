@@ -36,6 +36,12 @@ class _RequireAuthState extends State<RequireAuth> {
         if (snap.connectionState != ConnectionState.done) {
           return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
+
+        /**
+         * 这里留一个口子，现在不管谁来都直接返回给需要的页面
+         * 未来这里要根据条件判断用户是否登录
+         */
+
         if (snap.data == true) {
           return widget.builder(context);
         } else {
