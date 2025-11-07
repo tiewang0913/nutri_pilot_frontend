@@ -1,29 +1,30 @@
-
-class WellnessItem {
+class CatagoryItem {
   final String id;
   final String name;
-  const WellnessItem({required this.id, required this.name});
+  const CatagoryItem({required this.id, required this.name});
 
-  factory WellnessItem.fromJson(Map<String, dynamic> json){
-    return WellnessItem(id: json['_id'], name: json['name']);
+  factory CatagoryItem.fromJson(Map<String, dynamic> json) {
+    return CatagoryItem(id: json['_id'], name: json['name']);
   }
 }
 
-class UserChronic {
+class WellnessCatagory {
   List<String> selectedIds;
-  List<WellnessItem> chronics;
-  UserChronic({required this.selectedIds, required this.chronics});
+  List<CatagoryItem> items;
+  WellnessCatagory({required this.selectedIds, required this.items});
 
-  factory UserChronic.fromJson(Map<String, dynamic> json) {
-    List<dynamic> rawList = json['chronics'];
-    List<WellnessItem> chronics = rawList.map((e) => WellnessItem.fromJson(e)).toList();
+  factory WellnessCatagory.fromJson(Map<String, dynamic> json) {
+    List<dynamic> rawList = json['items'];
+    List<CatagoryItem> items = rawList
+        .map((e) => CatagoryItem.fromJson(e))
+        .toList();
 
     List<dynamic> rawIdList = json['selectedIds'];
     List<String> selectedIds = rawIdList.map((e) => e.toString()).toList();
-    return UserChronic(selectedIds: selectedIds, chronics: chronics);
+    return WellnessCatagory(selectedIds: selectedIds, items: items);
   }
 
-  getChronics(){
-    return chronics;
+  getItems() {
+    return items;
   }
 }
