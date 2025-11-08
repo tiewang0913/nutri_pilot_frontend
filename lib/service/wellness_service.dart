@@ -16,4 +16,12 @@ class WellnessService {
       return res.value!;
     }
   }
+
+  Future<CatagoryItem> addItem(String tag, String name) async {
+    return CatagoryItem(id: "1", name: name);
+  }
+
+  Future<void> saveUserSelection(String tag, List<String> selectedIds) async {
+
+  }
 }
