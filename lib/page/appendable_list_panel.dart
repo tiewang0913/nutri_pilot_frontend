@@ -90,9 +90,9 @@ class _AppendableListPanelState extends State<AppendableListPanel> {
     if (trimmed.isEmpty) return;
 
     final created = await DI.I.wellnessService.addItem(widget.tag, trimmed);
-    if (!mounted) return;
+    if (!mounted || created == null) return;
     setState(() {
-      _items = [..._items, created];
+      _items = [..._items, created!];
       _selected.add(created.id); // 新增默认选中
       _dirty = true;
       _query = ''; // 清空过滤，避免看不到新项

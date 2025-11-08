@@ -8,20 +8,25 @@ class WellnessService {
   WellnessService(this.repo);
 
   Future<WellnessCatagory?> getWellnessCatagory(String tag) async {
-    InterfaceResult<WellnessCatagory> res = await repo.getWellnessCatagory(tag);
+    InterfaceResult<dynamic> res = await repo.getWellnessCatagory(tag);
     if (DI.I.messageHandler.isErr(res)) {
       DI.I.messageHandler.handleErr(res);
       return null;
     } else {
-      return res.value!;
+      return WellnessCatagory.fromJson(res.value!);
     }
   }
 
-  Future<CatagoryItem> addItem(String tag, String name) async {
-    return CatagoryItem(id: "1", name: name);
+  Future<CatagoryItem?> addItem(String tag, String name) async {
+    InterfaceResult<dynamic> res =await repo.addCatalogItem(tag, name);
+    if (DI.I.messageHandler.isErr(res)) {
+      DI.I.messageHandler.handleErr(res);
+      return null;
+    } else {
+      return CatagoryItem.fromJson(res.value!);
+    }
+    
   }
 
-  Future<void> saveUserSelection(String tag, List<String> selectedIds) async {
-
-  }
+  Future<void> saveUserSelection(String tag, List<String> selectedIds) async {}
 }

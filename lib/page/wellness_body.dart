@@ -32,8 +32,8 @@ class WellnessBody extends StatelessWidget{
             child: TabBarView(
               physics: const BouncingScrollPhysics(),
               children: const [
-                AppendableListPanel(tag:"user_chronics"),
-                AppendableListPanel(tag:"user_allergies"),
+                AppendableListPanel(tag:"chronics"),
+                AppendableListPanel(tag:"allergies"),
               ],
             ),
           ),
