@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuitri_pilot_frontend/page/body/home_body.dart';
 import 'package:nuitri_pilot_frontend/page/body/more_body.dart';
-import 'package:nuitri_pilot_frontend/page/wellness_body.dart';
+import 'package:nuitri_pilot_frontend/page/body/wellness_body.dart';
 
 
 
