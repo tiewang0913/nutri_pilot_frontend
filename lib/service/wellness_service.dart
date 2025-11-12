@@ -28,7 +28,10 @@ class WellnessService {
   }
 
   Future<bool> saveUserSelection(String tag, List<String> selectedIds) async {
-    InterfaceResult<dynamic> res = await repo.saveUserSelectedIds(tag, selectedIds);
+    InterfaceResult<dynamic> res = await repo.saveUserSelectedIds(
+      tag,
+      selectedIds,
+    );
     if (DI.I.messageHandler.isErr(res)) {
       DI.I.messageHandler.handleErr(res);
       return false;

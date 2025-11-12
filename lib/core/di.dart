@@ -1,11 +1,14 @@
 // lib/core/di.dart
 import 'package:flutter/material.dart';
 import 'package:nuitri_pilot_frontend/core/message_handler.dart';
+import 'package:nuitri_pilot_frontend/repo/suggestion_repo.dart';
 import 'package:nuitri_pilot_frontend/repo/wellness_repo.dart';
 import 'package:nuitri_pilot_frontend/service/auth_service.dart';
+import 'package:nuitri_pilot_frontend/service/suggestion_service.dart';
 import 'package:nuitri_pilot_frontend/service/wellness_service.dart';
 
 import '../repo/auth_repo.dart';
+
 /*
  * 这个是组合模式依赖管理的类，使用这个类，把所有组件的构建组合放在一起
  * 这样，手动模拟了Spring中的依赖注入功能。
@@ -20,6 +23,7 @@ class DI {
   late final AuthService _authService;
   late final WellnessService _wellnessService;
   late final MessageHandler _messageHandler;
+  late final SuggestionService _suggestionService;
 
   /// 导航 key，便于全局错误提示/跳转
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -33,6 +37,7 @@ class DI {
 
   MessageHandler get messageHandler => _messageHandler;
 
+  SuggestionService get suggestionSerivce => _suggestionService;
 
   /// 在应用启动时调用一次。
   void init() {
@@ -42,5 +47,6 @@ class DI {
       navigatorKey: navigatorKey,
       messengerKey: scaffoldMessengerKey,
     );
+    _suggestionService = SuggestionService(SuggestionRepo());
   }
 }
