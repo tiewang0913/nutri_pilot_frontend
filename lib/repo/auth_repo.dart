@@ -33,12 +33,12 @@ class AuthRepository {
     }
   }
 
-  Future<InterfaceResult<dynamic>> resetPassword(
-    String email,
+  Future<InterfaceResult<dynamic>> requestOtp(
+    String email, String bizId 
   ) async {
     return await post(
-      '/auth/forget-password',
-      {"email": email}
+      '/auth/request-otp',
+      {"email": email, "biz_id": bizId}
     );
   }
 
@@ -46,15 +46,17 @@ class AuthRepository {
     String email,
     String otp,
     String newPwd,
+    String bizId
   ) async {
     Map<String, dynamic> param = {
       "email": email,
       "otp": otp,
       "password": newPwd,
+      "biz_id": bizId
     };
 
     return await post(
-      '/auth/reset-password',
+      '/auth/confirm-password',
       param
     );
   }

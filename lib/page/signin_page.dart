@@ -29,7 +29,9 @@ class _SignInPageState extends State<SignInPage> {
     Navigator.pushNamedAndRemoveUntil(context, '/forgetPassword', (r) => false);
   }
 
-  void _gotoSignUp(){}
+  void _gotoSignUp(){
+    Navigator.pushNamedAndRemoveUntil(context, '/signUp', (r) => false);
+  }
 
   @override
   Widget build(BuildContext context) {

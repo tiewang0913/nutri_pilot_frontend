@@ -14,7 +14,9 @@ class AppRouter {
       case '/signin':
         return MaterialPageRoute(builder: (_) => const SignInPage());
       case '/forgetPassword':
-        return MaterialPageRoute(builder: (_) => const ForgetPasswordPage());
+        return MaterialPageRoute(builder: (_) => const ForgetPasswordPage(forget: true));
+      case '/signUp':
+        return MaterialPageRoute(builder: (_) => const ForgetPasswordPage(forget: false));
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(body: Center(child: Text('Page not found'))),

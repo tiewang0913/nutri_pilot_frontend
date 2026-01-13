@@ -6,13 +6,16 @@ import 'package:nuitri_pilot_frontend/core/widgets/text_field_widget.dart';
 import 'package:email_validator/email_validator.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
-  const ForgetPasswordPage({super.key});
+
+  final bool forget;
+  const ForgetPasswordPage({super.key, required this.forget});
 
   @override
   State<StatefulWidget> createState() => _ForgetPasswordState();
 }
 
 class _ForgetPasswordState extends State<ForgetPasswordPage> {
+
   String? _error;
   int step = 1;
   bool _loading = false;
@@ -20,8 +23,10 @@ class _ForgetPasswordState extends State<ForgetPasswordPage> {
   final _otpControl = TextEditingController();
   final _newPwdControl = TextEditingController();
   final _confirmPwdControl = TextEditingController();
+  
 
   AppResult<String> _validateEmail(String email) {
+    
     if (EmailValidator.validate(email)) {
       return AppOk(email);
     } else {
@@ -61,7 +66,7 @@ class _ForgetPasswordState extends State<ForgetPasswordPage> {
     if (DI.I.messageHandler.isErr(validatingResult)) {
       DI.I.messageHandler.handleErr(validatingResult);
     } else {
-      String? res = await DI.I.authService.resetPassword(email);
+      String? res = await DI.I.authService.requestOtp(email, widget.forget);
       if (res != null) {
         setState(() {
           step = 2;
@@ -87,7 +92,7 @@ class _ForgetPasswordState extends State<ForgetPasswordPage> {
     if (DI.I.messageHandler.isErr(validateRes)) {
       DI.I.messageHandler.handleErr(validateRes);
     } else {
-      String? res = await DI.I.authService.confirmPassword(email, otp, newPwd);
+      String? res = await DI.I.authService.confirmPassword(email, otp, newPwd, widget.forget);
       if (res != null) {
         DI.I.messageHandler.showMessage(res);
         Navigator.pushNamedAndRemoveUntil(context, '/signin', (r) => false);
@@ -95,9 +100,10 @@ class _ForgetPasswordState extends State<ForgetPasswordPage> {
     }
   }
 
+
   List<Widget> get step1Controls => [
-    const Text(
-      "Forgot your password?",
+     Text(
+      widget.forget ? "Forgot your password?" : "Welcome to Nutri Pilot",
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
     ),
@@ -148,8 +154,8 @@ class _ForgetPasswordState extends State<ForgetPasswordPage> {
   ];
 
   List<Widget> get step2Controls => [
-    const Text(
-      "Reset your password",
+    Text(
+      widget.forget ? "Reset your password?" : "Create your account",
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
     ),
@@ -175,7 +181,7 @@ class _ForgetPasswordState extends State<ForgetPasswordPage> {
               width: 20,
               child: CircularProgressIndicator(strokeWidth: 2),
             )
-          : const Text('Reset Password'),
+          : Text(widget.forget? 'Reset Password' : 'Create Account'),
     ),
     const SizedBox(height: 12),
 

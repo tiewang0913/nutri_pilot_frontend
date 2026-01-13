@@ -9,6 +9,9 @@ import 'package:nuitri_pilot_frontend/repo/auth_repo.dart';
 
 class AuthService{
 
+  final String FORGET_PASSWORD = "1";
+  final String SIGN_UP = "2";
+
   AuthRepository repo;
 
   AuthService(this.repo);
@@ -33,8 +36,8 @@ class AuthService{
     return success;
   }
 
-  Future<String?> resetPassword(String email) async {
-    InterfaceResult<dynamic> res =  await repo.resetPassword(email);
+  Future<String?> requestOtp(String email, bool forget) async {
+    InterfaceResult<dynamic> res =  await repo.requestOtp(email, forget? FORGET_PASSWORD: SIGN_UP);
 
     if (DI.I.messageHandler.isErr(res)) {
       DI.I.messageHandler.handleErr(res);
@@ -48,8 +51,9 @@ class AuthService{
     String email,
     String otp,
     String newPwd,
+    bool forget
   ) async {
-    InterfaceResult<dynamic> res =  await repo.confirmPassword(email, otp, newPwd);
+    InterfaceResult<dynamic> res =  await repo.confirmPassword(email, otp, newPwd, forget ? FORGET_PASSWORD : SIGN_UP);
     if (DI.I.messageHandler.isErr(res)) {
       DI.I.messageHandler.handleErr(res);
       return null;
