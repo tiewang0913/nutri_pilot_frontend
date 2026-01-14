@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Nutri Pilot',
-      theme: AppTheme.lightTheme,
+      theme: AppTheme.nutriPilotTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
       onGenerateRoute: AppRouter.generateRoute,

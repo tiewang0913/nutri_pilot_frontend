@@ -23,4 +23,30 @@ class AppTheme {
     colorSchemeSeed: Colors.deepPurple,
     brightness: Brightness.dark,
   );
+
+  static ThemeData nutriPilotTheme = ThemeData(
+  useMaterial3: true,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: const Color(0xFF4CAF50),
+    brightness: Brightness.light,
+  ),
+  scaffoldBackgroundColor: const Color(0xFFF7F8FA),
+  textTheme: const TextTheme(
+    titleLarge: TextStyle(fontWeight: FontWeight.w600),
+    bodyMedium: TextStyle(height: 1.4),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
+  ),
+  cardTheme: const CardThemeData(
+    elevation: 1,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(14)),
+    ),
+  ),
+);
+
+ 
 }
