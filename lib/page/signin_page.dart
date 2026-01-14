@@ -75,7 +75,7 @@ class _SignInPageState extends State<SignInPage> {
                 onPressed: _loading ? null : _gotoForgetPassword,
                 child: const Text(
                   "Forgot password?",
-                  style: TextStyle(fontSize: 14, color: Colors.blue),
+                  style: TextStyle(fontSize: 14),
                 ),
               ),
             ],

@@ -48,6 +48,8 @@ dependencies:
   path: ^1.9.1
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
   flutter_test:
     sdk: flutter
 
@@ -99,3 +101,15 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_native_splash:
+  color: "#F7F8FA"
+  image: assets/images/logo.png
+  android_12:
+    color: "#F7F8FA"
+    image: assets/images/logo.png
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
+  adaptive_icon_background: "#F7F8FA"
+  adaptive_icon_foreground: "assets/images/logo.png"
