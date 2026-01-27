@@ -5,11 +5,11 @@ import 'core/di.dart';
 
 void main() {
   DI.I.init();
-  runApp(const MyApp());
+  runApp(const NutriPilot());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class NutriPilot extends StatelessWidget {
+  const NutriPilot({super.key});
 
   @override
   Widget build(BuildContext context) {
