@@ -8,7 +8,8 @@ import 'package:path/path.dart' as p;
 final connector = Dio(
   BaseOptions(
     //baseUrl: 'http://localhost:5007',
-    baseUrl: 'http://10.0.2.2:5007',
+    //baseUrl: 'http://10.0.2.2:5007',
+    baseUrl: 'https://backend-production-aea9.up.railway.app',
     connectTimeout: const Duration(seconds: 8),
     receiveTimeout: const Duration(seconds: 300),
   ),
