@@ -1,4 +1,4 @@
-# nuitri_pilot_frontend
+# Nutri Pilot Frontend
 
 A new Flutter project.
 
